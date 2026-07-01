@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cöchi Nórcëk - Menu</title> <style>
-        /* Ultra-lekki styl dla słabego internetu */
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 15px; background-color: #fcfcfc; color: #222; }
-        .header { text-align: center; margin-bottom: 25px; border-bottom: 3px double #1d3557; padding-bottom: 15px; }
+    <title>Cöchi Nórcëk - Menu</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 15px; padding-top: 70px; background-color: #fcfcfc; color: #222; }
+        
+        /* Pływające menu językowe na górze ekranu */
+        .lang-bar { position: fixed; top: 0; left: 0; right: 0; background: #ffffff; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000; padding: 10px 0; text-align: center; }
+        .lang-btn { background: #f1faee; color: #1d3557; border: 1px solid #1d3557; padding: 8px 16px; margin: 0 4px; font-weight: bold; border-radius: 20px; cursor: pointer; font-size: 14px; transition: 0.2s; }
+        .lang-btn.active { background: #1d3557; color: white; }
+        
+        /* Style karty menu */
+        .header { text-align: center; margin-bottom: 25px; border-bottom: 3px double #1d3557; padding-bottom: 15px; margin-top: 10px; }
         h1 { color: #1d3557; margin: 0 0 5px 0; font-size: 26px; text-transform: uppercase; }
         .subtitle { font-style: italic; color: #457b9d; margin: 5px 0; font-size: 14px; }
         .establishment-date { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
@@ -16,47 +23,121 @@
         .item-name { font-weight: 600; font-size: 15px; padding-right: 5px; }
         .item-dots { flex-grow: 1; border-bottom: 1px dotted #aaa; margin: 0 5px; position: relative; top: -4px; }
         .item-price { font-weight: bold; color: #1d3557; font-size: 15px; white-space: nowrap; }
-        .item-subdesc { font-size: 12px; color: #666; margin-top: -8px; margin-bottom: 10px; }
         .beer-desc { font-size: 12px; color: #555; font-style: italic; }
+        
+        /* Alergeny styl */
+        .allergen-box { background: #f8f9fa; border-left: 4px solid #e63946; padding: 15px; margin-bottom: 15px; border-radius: 0 4px 4px 0; }
+        .allergen-title { font-weight: bold; color: #e63946; margin-bottom: 5px; }
+
+        /* Klasa do ukrywania nieaktywnych języków */
+        .menu-page { display: none; }
+        .menu-page.active { display: block; }
     </style>
 </head>
 <body>
 
+    <div class="lang-bar">
+        <button class="lang-btn active" onclick="changeLang('pl')">🇵🇱 PL</button>
+        <button class="lang-btn" onclick="changeLang('en')">🇬🇧 EN</button>
+        <button class="lang-btn" onclick="changeLang('cs')">🇨🇿 CS</button>
+        <button class="lang-btn" onclick="changeLang('all')">⚠️ Alergeny</button>
+    </div>
+
     <div class="header">
-        <h1>Cöchi Nórcëk</h1> <p class="subtitle">Smaczne jedzenie, kaszubska gościnność!</p> <p class="establishment-date">Rok założenia 1992</p> </div>
+        <h1>Cöchi Nórcëk</h1>
+        <p class="subtitle">Smaczne jedzenie, kaszubska gościnność!</p>
+        <p class="establishment-date">Rok założenia 1992</p>
+    </div>
 
-    <div class="section-title">...na dobry początek</div> <div class="menu-item">
-        <span class="item-name">Śledź po kaszubsku na zimno (1 szt.)</span> <span class="item-dots"></span>
-        <span class="item-price">8 zł</span> </div>
+    <div id="lang-pl" class="menu-page active">
+        <div class="section-title">...na dobry początek</div>
+        <div class="menu-item">
+            <span class="item-name">Śledź po kaszubsku na zimno (1 szt.)</span>
+            <span class="item-dots"></span>
+            <span class="item-price">8 zł</span>
+        </div>
 
-    <div class="section-title">Zupy</div> <p class="section-desc">Zapytaj kelnera, jakie zupy dziś serwujemy.</p> <div class="menu-item">
-        <span class="item-name">Duża porcja (500 ml)</span> <span class="item-dots"></span>
-        <span class="item-price">16 zł</span> </div>
-    <div class="menu-item">
-        <span class="item-name">Mała porcja (250 ml)</span> <span class="item-dots"></span>
-        <span class="item-price">8 zł</span> </div>
+        <div class="section-title">Zupy</div>
+        <p class="section-desc">Zapytaj kelnera, jakie zupy dziś serwujemy.</p>
+        <div class="menu-item"><span class="item-name">Duża porcja (500 ml)</span><span class="item-dots"></span><span class="item-price">16 zł</span></div>
+        <div class="menu-item"><span class="item-name">Mała porcja (250 ml)</span><span class="item-dots"></span><span class="item-price">8 zł</span></div>
 
-    <div class="section-title">Zestawy Obiadowe</div> <p class="section-desc">Każdy zestaw zawiera: frytki, ziemniaki lub kaszę oraz surówkę (z białej lub czerwonej kapusty, z marchwi, mix surówek lub buraczki).</p> <div class="menu-item"><span class="item-name">Gołąbek w sosie pomidorowym</span><span class="item-dots"></span><span class="item-price">30 zł</span></div> <div class="menu-item"><span class="item-name">Klopsiki w sosie koperkowym</span><span class="item-dots"></span><span class="item-price">30 zł</span></div> <div class="menu-item"><span class="item-name">Gulasz z szynki wieprzowej</span><span class="item-dots"></span><span class="item-price">32 zł</span></div> <div class="menu-item"><span class="item-name">Kebab na talerzu</span><span class="item-dots"></span><span class="item-price">32 zł</span></div> <div class="menu-item"><span class="item-name">Pierś z kurczaka panierowana</span><span class="item-dots"></span><span class="item-price">34 zł</span></div> <div class="menu-item"><span class="item-name">Pierś z kurczaka z rusztu</span><span class="item-dots"></span><span class="item-price">34 zł</span></div> <div class="menu-item"><span class="item-name">Kotlet schabowy panierowany</span><span class="item-dots"></span><span class="item-price">34 zł</span></div> <div class="menu-item"><span class="item-name">Karkówka duszona</span><span class="item-dots"></span><span class="item-price">34 zł</span></div> <div class="menu-item"><span class="item-name">Kotlet de volaille</span><span class="item-dots"></span><span class="item-price">34 zł</span></div> <div class="section-title">Ryby (w zestawach)</div> <p class="section-desc">Zestawy z dodatkami jak powyżej.</p> <div class="menu-item"><span class="item-name">Flądra gładzica tusza (250-300 g)</span><span class="item-dots"></span><span class="item-price">42 zł</span></div> <div class="menu-item"><span class="item-name">Pstrąg smażony tusza (250-300 g)</span><span class="item-dots"></span><span class="item-price">42 zł</span></div> <div class="menu-item"><span class="item-name">Pstrąg z wody tusza (250-300 g)</span><span class="item-dots"></span><span class="item-price">42 zł</span></div> <div class="menu-item"><span class="item-name">Dorsz łupacz filet (220-250 g)</span><span class="item-dots"></span><span class="item-price">44 zł</span></div> <div class="menu-item"><span class="item-name">Halibut dzwonko (220-250 g)</span><span class="item-dots"></span><span class="item-price">44 zł</span></div> <div class="menu-item"><span class="item-name">Łosoś smażony filet (200-230 g)</span><span class="item-dots"></span><span class="item-price">44 zł</span></div> <div class="menu-item"><span class="item-name">Łosoś z wody filet (200-230 g)</span><span class="item-dots"></span><span class="item-price">44 zł</span></div> <div class="section-title">Dania mączne i inne</div> <div class="menu-item"><span class="item-name">Pierogi ruskie (7 szt.)</span><span class="item-dots"></span><span class="item-price">25 zł</span></div> <div class="menu-item"><span class="item-name">Pierogi z mięsem (7 szt.)</span><span class="item-dots"></span><span class="item-price">27 zł</span></div> <div class="menu-item"><span class="item-name">Pierogi z mięsem w barszczu (5 szt.)</span><span class="item-dots"></span><span class="item-price">27 zł</span></div> <div class="menu-item"><span class="item-name">Naleśniki z serem (2 szt.)</span><span class="item-dots"></span><span class="item-price">16 zł</span></div> <div class="menu-item"><span class="item-name">Naleśniki z musem jabłkowym (2 szt.)</span><span class="item-dots"></span><span class="item-price">16 zł</span></div> <div class="menu-item"><span class="item-name">Gołąbek z pieczywem</span><span class="item-dots"></span><span class="item-price">18 zł</span></div> <div class="menu-item"><span class="item-name">Spaghetti bolognese</span><span class="item-dots"></span><span class="item-price">26 zł</span></div> <div class="menu-item"><span class="item-name">Placki ziemniaczane (4 szt.)</span><span class="item-dots"></span><span class="item-price">20 zł</span></div> <div class="section-title">Dla dzieci</div> <div class="menu-item"><span class="item-name">Zupa (250 ml)</span><span class="item-dots"></span><span class="item-price">8 zł</span></div> <div class="menu-item"><span class="item-name">Naleśnik z serem / musem / nutellą</span><span class="item-dots"></span><span class="item-price">8 zł</span></div> <div class="menu-item"><span class="item-name">Pierogi ruskie (4 szt.)</span><span class="item-dots"></span><span class="item-price">14 zł</span></div> <div class="menu-item"><span class="item-name">Pierogi z mięsem (4 szt.)</span><span class="item-dots"></span><span class="item-price">15 zł</span></div> <div class="menu-item"><span class="item-name">Spaghetti małe</span><span class="item-dots"></span><span class="item-price">14 zł</span></div> <div class="menu-item"><span class="item-name">Nuggetsy z frytkami i marchewką</span><span class="item-dots"></span><span class="item-price">20 zł</span></div> <div class="menu-item"><span class="item-name">Filet z flądry z frytkami i marchewką</span><span class="item-dots"></span><span class="item-price">24 zł</span></div> <div class="section-title">Dodatki poza zestawem</div> <div class="menu-item"><span class="item-name">Frytki (150 g)</span><span class="item-dots"></span><span class="item-price">8 zł</span></div> <div class="menu-item"><span class="item-name">Ziemniaki / kasza (150 g)</span><span class="item-dots"></span><span class="item-price">8 zł</span></div> <div class="menu-item"><span class="item-name">Surówka / buraczki (150 g)</span><span class="item-dots"></span><span class="item-price">8 zł</span></div> <div class="menu-item"><span class="item-name">Ketchup</span><span class="item-dots"></span><span class="item-price">2 zł</span></div> <div class="section-title">Piwo z nalewaka</div> <p class="section-desc">Okocim, Kasztelan</p> <div class="menu-item"><span class="item-name">Pojemność 0,3 l</span><span class="item-dots"></span><span class="item-price">11 zł</span></div> <div class="menu-item"><span class="item-name">Pojemność 0,5 l</span><span class="item-dots"></span><span class="item-price">13 zł</span></div> <div class="section-title">Piwa butelkowe (Browar Amber 0,5 l)</div> <div class="menu-item">
-        <span class="item-name">Neptun <span class="beer-desc">(Jasny lager, orzeźwiający – 5,8%)</span></span> <span class="item-dots"></span>
-        <span class="item-price">12 zł</span> </div>
-    <div class="menu-item">
-        <span class="item-name">Naturalne <span class="beer-desc">(Niepasteryzowany lager, lżejsze – 5,7%)</span></span> <span class="item-dots"></span>
-        <span class="item-price">12 zł</span> </div>
-    <div class="menu-item">
-        <span class="item-name">Żywe <span class="beer-desc">(Niepasteryzowany lager, cięższe – 6,2%)</span></span> <span class="item-dots"></span>
-        <span class="item-price">14 zł</span> </div>
-    <div class="menu-item">
-        <span class="item-name">Złote Lwy <span class="beer-desc">(Jasny lager, goryczkowo-słodowy – 5,6%)</span></span> <span class="item-dots"></span>
-        <span class="item-price">14 zł</span> </div>
-    <div class="menu-item">
-        <span class="item-name">Pszeniczniak <span class="beer-desc">(Lekkie, białe piwo, mętne – 5,2%)</span></span> <span class="item-dots"></span>
-        <span class="item-price">14 zł</span> </div>
-    <div class="menu-item">
-        <span class="item-name">Amber Apa <span class="beer-desc">(Goryczkowe z cytrusami – 5,2%)</span></span> <span class="item-dots"></span>
-        <span class="item-price">14 zł</span> </div>
-    <div class="menu-item">
-        <span class="item-name">Grand Porter <span class="beer-desc">(Ciężkie, kawa i czekolada – 8%)</span></span> <span class="item-dots"></span>
-        <span class="item-price">14 zł</span> </div>
+        <div class="section-title">Zestawy Obiadowe</div>
+        <p class="section-desc">Każdy zestaw zawiera dodatki.</p>
+        <div class="menu-item"><span class="item-name">Kotlet schabowy panierowany</span><span class="item-dots"></span><span class="item-price">34 zł</span></div>
+        </div>
 
-    <div class="section-title">Piwa Bezalkoholowe (0,5 l)</div> <div class="menu-item"><span class="item-name">Žatecký 0.0%</span><span class="item-dots"></span><span class="item-price">13 zł</span></div> <div class="menu-item"><span class="item-name">Okocim Radler 0% (różne smaki)</span><span class="item-dots"></span><span class="item-price">13 zł</span></div> <div class="section-title">Napoje Gorące</div> <div class="menu-item"><span class="item-name">Espresso</span><span class="item-dots"></span><span class="item-price">7 zł</span></div> <div class="menu-item"><span class="item-name">Americano</span><span class="item-dots"></span><span class="item-price">8 zł</span></div> <div class="menu-item"><span class="item-name">Espresso doppio</span><span class="item-dots"></span><span class="item-price">9 zł</span></div> <div class="menu-item"><span class="item-name">Cappuccino</span><span class="item-dots"></span><span class="item-price">10 zł</span></div> <div class="menu-item"><span class="item-name">Cafe latte</span><span class="item-dots"></span><span class="item-price">12 zł</span></div> <div class="menu-item"><span class="item-name">Herbaty Brodies (czarna/zielona/owocowa)</span><span class="item-dots"></span><span class="item-price">8 zł</span></div> <div class="menu-item"><span class="item-name">Barszcz w kubku</span><span class="item-dots"></span><span class="item-price">8 zł</span></div> <div class="section-title">Napoje Zimne</div> <div class="menu-item"><span class="item-name">Coca-Cola / Fanta / Sprite / Zero (0,5 l)</span><span class="item-dots"></span><span class="item-price">9 zł</span></div> <div class="menu-item"><span class="item-name">Woda mineralna (0,5 l)</span><span class="item-dots"></span><span class="item-price">6 zł</span></div> <div class="menu-item"><span class="item-name">Fuze Tea (brzoskwinia / zielona herbata 0,5 l)</span><span class="item-dots"></span><span class="item-price">9 zł</span></div> <div class="menu-item"><span class="item-name">Napoje owocowe Tymbark (różne smaki 0,25 l)</span><span class="item-dots"></span><span class="item-price">6 zł</span></div> <div class="menu-item"><span class="item-name">Sok Tymbark / Cappy (jabłko / pomarańcza 0,3 l)</span><span class="item-dots"></span><span class="item-price">—</span></div> </body>
+
+    <div id="lang-en" class="menu-page">
+        <div class="section-title">...for a good start</div>
+        <div class="menu-item">
+            <span class="item-name">Kashubian herring (cold, 1 pc.)</span>
+            <span class="item-dots"></span>
+            <span class="item-price">8 PLN</span>
+        </div>
+
+        <div class="section-title">Soups</div>
+        <p class="section-desc">Ask the waiter for today's soup selection.</p>
+        <div class="menu-item"><span class="item-name">Large portion (500 ml)</span><span class="item-dots"></span><span class="item-price">16 PLN</span></div>
+        <div class="menu-item"><span class="item-name">Small portion (250 ml)</span><span class="item-dots"></span><span class="item-price">8 PLN</span></div>
+        
+        <div class="section-title">Dinner Sets</div>
+        <p class="section-desc">Each set includes side dishes.</p>
+        <div class="menu-item"><span class="item-name">Breaded pork chop (Schabowy)</span><span class="item-dots"></span><span class="item-price">34 PLN</span></div>
+    </div>
+
+
+    <div id="lang-cs" class="menu-page">
+        <div class="section-title">...pro dobrý začátek</div>
+        <div class="menu-item">
+            <span class="item-name">Kašubský sledě za studena (1 ks)</span>
+            <span class="item-dots"></span>
+            <span class="item-price">8 Kč / zł</span>
+        </div>
+
+        <div class="section-title">Polévky</div>
+        <p class="section-desc">Zeptejte se číšníka na dnešní polévku.</p>
+        <div class="menu-item"><span class="item-name">Velká porce (500 ml)</span><span class="item-dots"></span><span class="item-price">16 zł</span></div>
+        
+        <div class="section-title">Hlavní Jídla</div>
+        <p class="section-desc">Každé jídlo obsahuje přílohy.</p>
+        <div class="menu-item"><span class="item-name">Smažený vepřový řízek</span><span class="item-dots"></span><span class="item-price">34 zł</span></div>
+    </div>
+
+
+    <div id="lang-all" class="menu-page">
+        <div class="section-title" style="background-color: #e63946;">Informacja o alergenach</div>
+        <p class="section-desc">Poniżej znajduje się lista alergenów występujących w naszych daniach:</p>
+        
+        <div class="allergen-box">
+            <div class="allergen-title">1. Gluten (Zboża)</div>
+            <p style="margin:0; font-size: 13px; color:#555;">Obecny w: Kotlet schabowy, de volaille, pierogi, naleśniki, nuggetsy, piwo.</p>
+        </div>
+
+        <div class="allergen-box">
+            <div class="allergen-title">4. Ryby</div>
+            <p style="margin:0; font-size: 13px; color:#555;">Obecny w: Śledź po kaszubsku, flądra, pstrąg, dorsz, halibut, łosoś.</p>
+        </div>
+    </div>
+
+    <script>
+        function changeLang(langId) {
+            // Ukryj wszystkie języki
+            const pages = document.querySelectorAll('.menu-page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Dezaktywuj wszystkie przyciski
+            const buttons = document.querySelectorAll('.lang-bar button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Pokaż wybrany język i aktywuj przycisk
+            document.getElementById('lang-' + langId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            // Przewiń na górę strony po zmianie języka
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+
+</body>
 </html>
